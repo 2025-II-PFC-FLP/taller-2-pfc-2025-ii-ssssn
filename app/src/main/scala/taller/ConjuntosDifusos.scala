@@ -23,7 +23,13 @@ class ConjuntosDifusos {
 
   }
   def inclusion(cd1: ConjDifuso, cd2: ConjDifuso): Boolean = {
-    true
+    @annotation.tailrec
+    def aux(x: Int): Boolean = {
+      if (x > 1000) true
+      else if (cd1(x) > cd2(x)) false
+      else aux(x + 1)
+    }
+    aux(0)
 
   }
   def igualdad(cd1: ConjDifuso, cd2: ConjDifuso): Boolean = {
