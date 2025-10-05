@@ -66,4 +66,36 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     assert(interCD(15) > interCD(0))  // 15 está más cerca de 10 y es positivo
     assert(interCD(100) < interCD(10)) // 100 ya no está "cerca" de 10
   }
+  // ----------------------------------------------------------
+  // 🧩 Prueba 4: Complemento de conjuntos difusos
+  // ----------------------------------------------------------
+  test("complemento debería invertir los grados de pertenencia correctamente") {
+    // A = conjunto de números "cercanos a 5"
+    val A: cd.ConjDifuso = (x: Int) => {
+      val distancia = Math.abs(x - 5)
+      1.0 / (1.0 + distancia)
+    }
+
+    // C = conjunto de números "cercanos a 10"
+    val C: cd.ConjDifuso = (x: Int) => {
+      val distancia = Math.abs(x - 10)
+      Math.max(0.0, 1.0 - (distancia / 10.0))
+    }
+
+    // Complementos
+    val compA = cd.complemento(A)
+    val compC = cd.complemento(C)
+
+    // 🔹 Verificar propiedades básicas
+    assert(math.abs(compA(5) - (1.0 - A(5))) < 0.0001) // complemento(5) ≈ 0
+    assert(math.abs(compC(10) - (1.0 - C(10))) < 0.0001) // complemento(10) ≈ 0
+
+    // 🔹 Verificar inversión de grados
+    assert(compA(0) > compA(5))  // El complemento de un valor lejano a 5 debe ser mayor
+    assert(compC(0) > compC(10)) // El complemento de un número lejos de 10 debe ser mayor
+
+    // 🔹 Verificar límites de rango
+    assert(compA(5) >= 0.0 && compA(5) <= 1.0)
+    assert(compC(20) >= 0.0 && compC(20) <= 1.0)
+  }
 }
