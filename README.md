@@ -1,22 +1,26 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/lEw1Qm1j)
-# Asignación: [Nombre de la asignación]
+# Asignación: [Taller #2]
 
-**Fecha:** [DD/MM/AAAA]
-**Curso:** [Nombre del Curso]
+**Fecha:** [06/10/2025]
+**Curso:** [Programación Funcional y Concurrente]
 
 ---
 
 ## 👥 Integrantes del Grupo
 
-| Nombre Completo | Código | Rol            | Correo Electrónico        |
-| --------------- | ------ | -------------- | ------------------------- |
-| [Estudiante 1]  | 123456 | [Líder/Colab.] | [correo1@institucion.edu] |
-| [Estudiante 2]  | 123457 | [Colaborador]  | [correo2@institucion.edu] |
-| [Estudiante 3]  | 123458 | [Colaborador]  | [correo3@institucion.edu] |
+| Nombre Completo             | Código    | Rol           | Correo Electrónico        |
+|-----------------------------|-----------|---------------| ------------------------- |
+| [Samuel Agudelo Sosa]       | 202459419 | [Colaborador] | [agudelo.samuel@correounivalle.edu.co] |
+| [Samuel Alvarado Acevedo]   | 202459469 | [Colaborador] | [samuel.alvarado@correounivalle.edu.co] |
+| [Santiago Arboleda Vargas]  | 202459463 | [Colaborador] | [santiago.arboleda.vargas@correounivalle.edu.co] |
+| [Juan Manuel Gómez Álvarez] | 202459450 | [Colaborador] | [juan.m.gomez.a@correounivalle.edu.co] |
 
 ---
 
 ## 📌 Descripción de la Asignación
 
-[Breve párrafo explicando el propósito y objetivos del taller (4-6 líneas). Ejemplo:]
-_"Este taller busca analizar [tema principal] mediante [metodología]. Los objetivos incluyen [objetivo 1], [objetivo 2] y [objetivo 3], aplicando conceptos vistos en clase como [concepto relevante]."_
+Este taller tiene como objetivo analizar el comportamiento de los conjuntos difusos mediante
+implementación funcional. Estos objetivos son modelar los grados de pertenecia de un conjunto
+con respecto a otro, también realizar operaciones básicas entre conjuntos como unión,
+intersección, inclusión y complemento, además de determinar si un número es grande utilizando
+la recursividad, e incluyendo el estado de pila de llamadas durante su ejecución.
