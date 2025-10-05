@@ -6,8 +6,10 @@ class ConjuntosDifusos {
     s(elem)
   }
   def grande(d: Int, e: Int): ConjDifuso = {
-    // Implementaci´on de la funci´on grande
-
+    (n: Int) => {
+      if (n <= 0) 0.0
+      else Math.pow(n.toDouble/(n+d).toDouble, e.toDouble)
+    }
   }
   def complemento(c: ConjDifuso): ConjDifuso = {
     (x: Int) => 1.0 - c(x)
