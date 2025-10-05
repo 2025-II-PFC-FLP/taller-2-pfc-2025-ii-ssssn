@@ -23,11 +23,11 @@ class ConjuntosDifusos {
 
   }
   def inclusion(cd1: ConjDifuso, cd2: ConjDifuso): Boolean = {
-    // Implementaci´on de la funci´on inclusion
+    true
 
   }
   def igualdad(cd1: ConjDifuso, cd2: ConjDifuso): Boolean = {
-    // Implementaci´on de la funci´on igualdad
+    true
 
   }
 }
