@@ -124,3 +124,43 @@ class ConjuntosDifusos {
 - Las operaciones difusas están expresadas con operaciones matemáticas simples.
 - En el caso de `inclusion`, se utiliza recursión de cola (`@tailrec`) para comparar los valores de un dominio previamente indicado ($0 ≤ x ≤ 1000$).
 - En el caso de `igualdad` se reutiliza la función `inclusion`, para reflejar el principio de equivalencia.
+
+---
+# 4. Informe de proceso
+### 4.1. Pila de llamadas - Inclusión
+
+Ejemplo 1 (caso verdadero): `cd.inclusion(A, B)`
+
+```mermaid
+graph TD;
+  A0["inclusion(A, B)"]
+  A0 --> A1["aux(0): A(0) ≤ B(0) → continúa"]
+  A1 --> A2["aux(1): A(1) ≤ B(1) → continúa"]
+  A2 --> A3["aux(2): A(2) ≤ B(2) → continúa"]
+  A3 --> A4["..."]
+  A4 --> A5["aux(1000): límite alcanzado"]
+  A5 --> A6["Retorna true (todos los valores cumplen)"]
+```
+Ejemplo 2 (caso falso): `cd.inclusion(B, A)`
+
+```mermaid
+graph TD;
+  B0["inclusion(B, A)"]
+  B0 --> B1["aux(0): B(0) ≤ A(0)? falso"]
+  B1 --> B2["Retorna false inmediatamente"]
+```
+### 4.2. Pila de llamadas - Igualdad
+
+Ejemplo 1: `cd.igualdad(E, F)`
+
+```mermaid
+graph TD
+  I0["igualdad(E, F)"]
+  I0 --> I1["llama inclusion(E, F)"]
+  I1 --> I2["→ aux(0) ... aux(1000) todos cumplen → true"]
+  I0 --> I3["llama inclusion(F, E)"]
+  I3 --> I4["→ aux(0) ... aux(1000) todos cumplen → true"]
+  I4 --> I5["Ambos true → igualdad retorna true"]
+```
+
+---
