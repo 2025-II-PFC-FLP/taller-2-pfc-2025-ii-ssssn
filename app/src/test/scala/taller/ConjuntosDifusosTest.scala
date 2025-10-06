@@ -103,49 +103,58 @@ class ConjuntosDifusosTest extends AnyFunSuite {
   // ----------------------------------------------------------
   test("inclusion debería determinar si todos los grados de un conjunto son menores o iguales a los del otro") {
 
-    // A = conjunto de números "cercanos a 5"
+    // A = triángulo angosto centrado en 100 (altura 1, base [90,110])
     val A: cd.ConjDifuso = (x: Int) => {
-      val distancia = Math.abs(x - 5)
-      1.0 / (1.0 + distancia)
+      val dist = Math.abs(x - 100)
+      Math.max(0.0, 1.0 - dist / 10.0)
     }
 
-    // B = conjunto de números "múltiplos de 3" (difuso)
+    // B = triángulo ancho centrado en 100 (altura 1, base [50,150])
     val B: cd.ConjDifuso = (x: Int) => {
-      val resto = x % 3
-      1.0 - (resto.toDouble / 3.0)
+      val dist = Math.abs(x - 100)
+      Math.max(0.0, 1.0 - dist / 50.0)
     }
 
-    // C = conjunto de números "cercanos a 10"
+    // C = trapecio dentro de B (altura 0.8, base [70,130], techo [90,110])
     val C: cd.ConjDifuso = (x: Int) => {
-      val distancia = Math.abs(x - 10)
-      Math.max(0.0, 1.0 - (distancia / 10.0))
+      if (x < 70 || x > 130) 0.0
+      else if (x < 90) (x - 70) / 20.0 * 0.8
+      else if (x <= 110) 0.8
+      else (130 - x) / 20.0 * 0.8
     }
 
-    // D = conjunto de números "grandes positivos"
+    // D = función creciente para "grandes positivos" (desde 0.0 en x=0 hasta 1.0 en x=1000)
     val D: cd.ConjDifuso = (x: Int) => {
-      if (x <= 0) 0.0
-      else 1.0 - 1.0 / (x.toDouble + 1.0)
+      x / 1000.0
     }
 
-    // E = conjunto de números pequeños
+    // E = "números pequeños" decreciente (desde 1.0 en x=0 hasta ~0.0 en x=1000, siempre ≤ C en [70,130])
     val E: cd.ConjDifuso = (x: Int) => {
-      if (x <= 0) 1.0
-      else 1.0 / (x + 1.0)
+      0.2 / (x + 1.0) * 70  // máx ≈0.2 en x=0, va bajando
     }
 
-    // Ejemplos donde la inclusión debería cumplirse
-    assert(cd.inclusion(C, D))  // 1. Cercanos a 10 ⊆ grandes positivos
-    assert(cd.inclusion(E, C))  // 2. Números pequeños ⊆ cercanos a 10 (bajo nivel de pertenencia)
-    assert(cd.inclusion(E, D))  // 3. Pequeños ⊆ grandes positivos
-    assert(cd.inclusion(C, C))  // 4.
-    assert(cd.inclusion(A, D))  // 5. Números cercanos a 5 ⊆ grandes positivos
+    // F = constante 0.4
+    val F: cd.ConjDifuso = (_: Int) => 0.4
 
-    // Ejemplos donde la inclusión NO debería cumplirse
-    assert(!cd.inclusion(A, B)) // 1. Cercanos a 5 no ⊆ múltiplos de 3
-    assert(!cd.inclusion(B, A)) // 2. Múltiplos de 3 no ⊆ cercanos a 5
-    assert(!cd.inclusion(D, C)) // 3. Grandes no ⊆ cercanos a 10
-    assert(!cd.inclusion(B, D)) // 4. Múltiplos de 3 no ⊆ grandes positivos (algunos bajos)
-    assert(!cd.inclusion(A, E)) // 5. Cercanos a 5 no ⊆ pequeños
+    // G = pico suave en 100 (altura 0.6, base [80,120])
+    val G: cd.ConjDifuso = (x: Int) => {
+      val dist = Math.abs(x - 100)
+      Math.max(0.0, 0.6 - dist / 40.0)
+    }
+
+
+    // ---- TESTS TRUE ----
+    assert(cd.inclusion(A, B))  // 1. Angosto ⊆ Ancho
+    assert(cd.inclusion(C, B))  // 2. Trapecio ⊆ Ancho
+    assert(cd.inclusion(G, B))  // 5. Pico ⊆ Ancho
+
+    // ---- TESTS FALSE ----
+    assert(!cd.inclusion(B, A)) // 1. Ancho no ⊆ Angosto
+    assert(!cd.inclusion(B, C)) // 2. Ancho no ⊆ Trapecio
+    assert(!cd.inclusion(D, F)) // 3. Grandes no ⊆ constante 0.4
+    assert(!cd.inclusion(G, F)) // 4. Pico 0.6 no ⊆ 0.4
+    assert(!cd.inclusion(D, C)) // 5. Creciente no ⊆ trapecio
+
   }
 
   // ----------------------------------------------------------
