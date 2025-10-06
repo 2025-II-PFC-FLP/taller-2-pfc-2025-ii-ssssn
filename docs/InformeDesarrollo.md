@@ -124,5 +124,3 @@ class ConjuntosDifusos {
 - Las operaciones difusas están expresadas con operaciones matemáticas simples.
 - En el caso de `inclusion`, se utiliza recursión de cola (`@tailrec`) para comparar los valores de un dominio previamente indicado ($0 ≤ x ≤ 1000$).
 - En el caso de `igualdad` se reutiliza la función `inclusion`, para reflejar el principio de equivalencia.
-
----
