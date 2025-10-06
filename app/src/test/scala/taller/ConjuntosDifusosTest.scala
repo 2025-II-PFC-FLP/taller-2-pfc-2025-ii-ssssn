@@ -17,6 +17,9 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     assert(g(1) >= 0.0 && g(1) <= 1.0)
     assert(g(10) >= g(5))
     assert(g(100) > g(10))
+    assert(g(1000) > g(100))
+    assert(g(10000) > g(1000))
+    assert(g(100000) > g(99999))
   }
 
   // ----------------------------------------------------------
@@ -41,6 +44,8 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     assert(unionAB(3) >= unionAB(2))  // 3 es múltiplo de 3 y está cerca de 5
     assert(unionAB(5) == 1.0)         // 5 está en el centro de A
     assert(unionAB(9) >= unionAB(7))  // 9 es múltiplo de 3
+    assert(unionAB(10) >= unionAB(11)) // 10 está en el centro de B
+    assert(unionAB(15) >= unionAB(13)) // 15 es múltiplo de 3
   }
 
   // ----------------------------------------------------------
@@ -65,6 +70,10 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     assert(interCD(10) > interCD(2))  // 10 pertenece más que 2
     assert(interCD(15) > interCD(0))  // 15 está más cerca de 10 y es positivo
     assert(interCD(100) < interCD(10)) // 100 ya no está "cerca" de 10
+    assert(interCD(9) > 0.7)
+    assert(interCD(11) > 0.7)
+
+
   }
   // ----------------------------------------------------------
   // Prueba 4: Complemento de conjuntos difusos
