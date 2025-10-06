@@ -10,7 +10,7 @@ class ConjuntosDifusosTest extends AnyFunSuite {
   val cd = new ConjuntosDifusos()
 
   // ----------------------------------------------------------
-  // 🧩 Prueba 1: Conjunto difuso de números grandes
+  // Prueba 1: Conjunto difuso de números grandes
   // ----------------------------------------------------------
   test("grande debería retornar valores entre 0 y 1, y aumentar con n") {
     val g = cd.grande(2, 3)
@@ -20,9 +20,9 @@ class ConjuntosDifusosTest extends AnyFunSuite {
   }
 
   // ----------------------------------------------------------
-  // 🧩 Prueba 2: Unión de dos conjuntos difusos
+  // Prueba 2: Unión de dos conjuntos difusos
   // ----------------------------------------------------------
-  test("union debería retornar el máximo entre los grados de pertenencia (conjuntos diferentes)") {
+  test("unión debería retornar el máximo entre los grados de pertenencia (conjuntos diferentes)") {
     // A = conjunto de números "cercanos a 5"
     val A: cd.ConjDifuso = (x: Int) => {
       val distancia = Math.abs(x - 5)
@@ -44,9 +44,9 @@ class ConjuntosDifusosTest extends AnyFunSuite {
   }
 
   // ----------------------------------------------------------
-  // 🧩 Prueba 3: Intersección de dos conjuntos difusos
+  // Prueba 3: Intersección de dos conjuntos difusos
   // ----------------------------------------------------------
-  test("interseccion debería retornar el mínimo entre los grados de pertenencia (conjuntos diferentes)") {
+  test("intersección debería retornar el mínimo entre los grados de pertenencia (conjuntos diferentes)") {
     // C = conjunto de números "cercanos a 10"
     val C: cd.ConjDifuso = (x: Int) => {
       val distancia = Math.abs(x - 10)
@@ -67,7 +67,7 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     assert(interCD(100) < interCD(10)) // 100 ya no está "cerca" de 10
   }
   // ----------------------------------------------------------
-  // 🧩 Prueba 4: Complemento de conjuntos difusos
+  // Prueba 4: Complemento de conjuntos difusos
   // ----------------------------------------------------------
   test("complemento debería invertir los grados de pertenencia correctamente") {
     // A = conjunto de números "cercanos a 5"
@@ -99,9 +99,9 @@ class ConjuntosDifusosTest extends AnyFunSuite {
     assert(compC(20) >= 0.0 && compC(20) <= 1.0)
   }
   // ----------------------------------------------------------
-  // 🧩 Prueba 5: Inclusión entre conjuntos difusos
+  // Prueba 5: Inclusión entre conjuntos difusos
   // ----------------------------------------------------------
-  test("inclusion debería determinar si todos los grados de un conjunto son menores o iguales a los del otro") {
+  test("inclusión debería determinar si todos los grados de un conjunto son menores o iguales a los del otro") {
 
     // A = triángulo angosto centrado en 100 (altura 1, base [90,110])
     val A: cd.ConjDifuso = (x: Int) => {
@@ -158,7 +158,7 @@ class ConjuntosDifusosTest extends AnyFunSuite {
   }
 
   // ----------------------------------------------------------
-  // 🧩 Prueba 6: Igualdad entre conjuntos difusos
+  // Prueba 6: Igualdad entre conjuntos difusos
   // ----------------------------------------------------------
   test("igualdad debería verificar si dos conjuntos difusos tienen los mismos grados de pertenencia") {
 
