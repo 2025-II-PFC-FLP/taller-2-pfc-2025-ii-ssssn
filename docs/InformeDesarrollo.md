@@ -141,7 +141,20 @@ graph TD;
   A4 --> A5["aux(1000): límite alcanzado"]
   A5 --> A6["Retorna true (todos los valores cumplen)"]
 ```
-Ejemplo 2 (caso falso): `cd.inclusion(B, A)`
+Ejemplo 2 (caso verdadero): `cd.inclusion(A, B)`
+
+```mermaid
+graph TD;
+  A0["inclusion(A, B)"]
+  A0 --> A1["aux(0): A(0)=0.0 ≤ B(0)=0.0 → continúa"]
+  A1 --> A2["aux(50): A(50)=0.0 ≤ B(50)=0.0 → continúa"]
+  A2 --> A3["aux(80): A(80)=0.0 ≤ B(80)=0.6 → continúa"]
+  A3 --> A4["aux(100): A(100)=1.0 ≤ B(100)=1.0 → continúa"]
+  A4 --> A5["aux(120): A(120)=0.0 ≤ B(120)=0.6 → continúa"]
+  A5 --> A6["aux(150): A(150)=0.0 ≤ B(150)=0.0 → continúa"]
+  A6 --> A7["aux(1000): límite alcanzado → retorna true"]
+```
+Ejemplo 3 (caso falso): `cd.inclusion(B, A)`
 
 ```mermaid
 graph TD;
@@ -149,18 +162,42 @@ graph TD;
   B0 --> B1["aux(0): B(0) ≤ A(0)? falso"]
   B1 --> B2["Retorna false inmediatamente"]
 ```
+Ejemplo 4 (caso falso): `cd.inclusion(B, A)`
+
+```mermaid
+graph TD;
+  B0["inclusion(B, A)"]
+  B0 --> B1["aux(0): B(0)=0.0 ≤ A(0)=0.0 → continúa"]
+  B1 --> B2["aux(80): B(80)=0.6 > A(80)=0.0"]
+  B2 --> B3["Retorna false inmediatamente"]
+
+```
 ### 4.2. Pila de llamadas - Igualdad
 
 Ejemplo 1: `cd.igualdad(E, F)`
 
 ```mermaid
-graph TD
+graph TD;
   I0["igualdad(E, F)"]
   I0 --> I1["llama inclusion(E, F)"]
   I1 --> I2["→ aux(0) ... aux(1000) todos cumplen → true"]
   I0 --> I3["llama inclusion(F, E)"]
   I3 --> I4["→ aux(0) ... aux(1000) todos cumplen → true"]
   I4 --> I5["Ambos true → igualdad retorna true"]
+```
+Ejemplo 2: `cd.igualdad(E, F)`
+```mermaid
+graph TD;
+  I0["igualdad(E, F)"]
+  I0 --> I1["llama inclusion(E, F)"]
+  I1 --> I2["aux(0): E(0)=0.2 ≤ F(0)=0.2 → continúa"]
+  I2 --> I3["aux(4): E(4)=1.0 ≤ F(4)=1.0 → continúa"]
+  I3 --> I4["aux(8): E(8)=0.2 ≤ F(8)=0.2 → continúa"]
+  I4 --> I5["... hasta aux(1000): todas las comparaciones son iguales"]
+  I5 --> I6["inclusion(E, F) → true"]
+  I6 --> I7["llama inclusion(F, E)"]
+  I7 --> I8["aux(0)...aux(1000): mismos valores → true"]
+  I8 --> I9["Ambas inclusiones true → igualdad retorna true"]
 ```
 
 ---
